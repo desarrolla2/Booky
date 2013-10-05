@@ -1,0 +1,16 @@
+/app/bootstrap*
+/app/cache/*
+/app/config/parameters.yml
+/app/config/security.yml
+/app/logs/*
+/app/var/sessions/*
+/bin
+/nbproject/*
+/vendor/*
+/web/bundles/*
+/web/css/*
+/web/js/*
+/web/up/*
+/.idea
+*~
+*.swp

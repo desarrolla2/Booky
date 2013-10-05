@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="BDKPortal" default="build" basedir=".">
+    <property name="source" value="src"/>
+    <property name="ignore" value="build"/>
+    <property name="sonar-version" value="0.1-SNAPSHOT"/>
+
+    <target name="cache" description="Hard deletes cache directory contents">
+        <exec executable="php" failonerror="true">
+            <arg line="app/console cache:clear --env=dev --no-warmup"/>
+        </exec>
+    </target>
+
+    <target name="assets" description="Installs bundle assets in web directory">
+        <exec executable="php" failonerror="true">
+            <arg line="app/console assets:install web --symlink"/>
+        </exec>
+    </target>
+
+</project>
