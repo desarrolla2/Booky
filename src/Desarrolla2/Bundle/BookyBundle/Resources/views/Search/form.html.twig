@@ -1,0 +1,11 @@
+
+<form id="form-search" class="form-horizontal" role="form" method="post" action="{{ path('search') }}" >
+  <div class="row">
+    <div class="col-lg-10">
+      {{ form_widget(form.query, { 'attr': {'class': 'form-control input-lg', 'placeholder' : 'Search'}}) }}
+    </div>
+    <div class="col-lg-2">
+      <input type="submit" value="Search" class="btn btn-primary btn-lg"/>
+    </div>
+  </div>
+</form>

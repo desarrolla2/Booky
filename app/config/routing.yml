@@ -1,0 +1,5 @@
+booky:
+    resource: "@BookyBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
