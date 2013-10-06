@@ -17,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Suggest
  *
  * @author Daniel González <daniel.gonzalez@freelancemadrid.es>
- * @ORM\Table(name="suggest")
+ * @ORM\Table(name="suggestion")
  * @ORM\Entity(repositoryClass="Desarrolla2\Bundle\BookyBundle\Entity\Repository\SuggestionRepository")
  */
 
@@ -39,6 +39,13 @@ class Suggestion
      * @ORM\Column(name="url", type="string", length=255)
      */
     private $url;
+
+    /**
+     * @var Author
+     *
+     * @ORM\ManyToMany(targetEntity="Book")
+     */
+    private $book;
 
 
     /**

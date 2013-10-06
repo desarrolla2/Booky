@@ -40,6 +40,7 @@ class SearchController extends Controller
         $form = $this->createForm(new SearchType(), new SearchModel());
         $handler = new SearchHandler($form, $request);
         $searchEngine = $this->get('booky.engine.search');
+        $em =  $this->getDoctrine()->getManager();
 
         if (!$handler->process()) {
             return new JsonResponse($handler->getErrorsAsString(), 400);
@@ -50,7 +51,7 @@ class SearchController extends Controller
             return new JsonResponse($searchEngine->getErrorsAsString(), 400);
         }
 
-        $this->getDoctrine()->getManager()->getRepository('BookyBundle:Book')->factory($book);
+        $em->getRepository('BookyBundle:Book')->factory($book);
 
 
         return new JsonResponse($book, 200);

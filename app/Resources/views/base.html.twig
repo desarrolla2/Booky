@@ -28,48 +28,8 @@
 <body>
 {% include "::base.header.html.twig" %}
 
-<div id="main" class="container">
-  <h1>Booky</h1>
 
-  <p>
-    This is a template for a simple marketing or informational website. It includes a large callout called the hero
-    unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-  </p>
-
-  {% include "::base.search.html.twig" %}
-
-</div>
-
-<div id="search-result" class="container">{% block content %}{% endblock %}</div>
-
+<div id="main" class="container">{% block content %}{% endblock %}</div>
 {% include "::base.footer.html.twig" %}
-
-<script type="text/javascript">
-  $(function () {
-    var $loading = $('<p><img src="/img/loading.gif" /> Loading ...</p>');
-    var $result = $('#search-result');
-    $('#form-search').submit(function (e) {
-      e.preventDefault();
-      $result.html($loading);
-      var values = {};
-      $.each($(this).serializeArray(), function (i, field) {
-        values[field.name] = field.value;
-      });
-      $.post($(this).attr('action'), values)
-          .done(function (data) {
-            var html = '<table class="table"><thead><tr><td>key</td><td>value</td></tr></thead><tbody>';
-            $.each(data, function (key, value) {
-              html += '<tr><td>' + key + '</td><td>' + value + '</td></tr>'
-            });
-            html += '</tbody></table>';
-
-            $result.html($(html));
-          })
-          .fail(function (data) {
-            $result.html($('<div class="alert alert-danger">' + data.responseText + '</div>'));
-          })
-    });
-  });
-</script>
 </body>
 </html>

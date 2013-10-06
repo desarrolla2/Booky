@@ -3,6 +3,7 @@
 namespace Desarrolla2\Bundle\BookyBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Desarrolla2\Bundle\BookyBundle\Entity\Author;
 
 /**
  * AuthorRepository
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class AuthorRepository extends EntityRepository
 {
+    public function factory($name)
+    {
+        $em = $this->getEntityManager();
+
+        $author = $this->findOneBy(
+            array(
+                'name' => $name
+            )
+        );
+        if (!$author) {
+            $author = new Author();
+            $author->setName($name);
+        }
+
+        $em->persist($author);
+
+        return $author;
+    }
 }

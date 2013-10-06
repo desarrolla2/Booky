@@ -38,7 +38,6 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
             'rating' => $this->getRating(),
             'price' => $this->getPrice(),
             'suggestions' => $this->getSuggestions()
-
         );
     }
 

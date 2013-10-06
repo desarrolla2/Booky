@@ -75,7 +75,7 @@ class Book
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Suggestion", mappedBy="book", cascade={"remove"})
+     * @ORM\ManyToMany(targetEntity="Suggestion", mappedBy="book", cascade={"remove"})
      */
     private $suggestions;
 
@@ -117,11 +117,19 @@ class Book
     {
         $this->suggestions = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -137,14 +145,14 @@ class Book
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -160,14 +168,14 @@ class Book
     public function setIsbn($isbn)
     {
         $this->isbn = $isbn;
-    
+
         return $this;
     }
 
     /**
      * Get isbn
      *
-     * @return string 
+     * @return string
      */
     public function getIsbn()
     {
@@ -183,14 +191,14 @@ class Book
     public function setResume($resume)
     {
         $this->resume = $resume;
-    
+
         return $this;
     }
 
     /**
      * Get resume
      *
-     * @return string 
+     * @return string
      */
     public function getResume()
     {
@@ -206,14 +214,14 @@ class Book
     public function setRating($rating)
     {
         $this->rating = $rating;
-    
+
         return $this;
     }
 
     /**
      * Get rating
      *
-     * @return integer 
+     * @return integer
      */
     public function getRating()
     {
@@ -229,14 +237,14 @@ class Book
     public function setPrice($price)
     {
         $this->price = $price;
-    
+
         return $this;
     }
 
     /**
      * Get price
      *
-     * @return float 
+     * @return float
      */
     public function getPrice()
     {
@@ -252,7 +260,21 @@ class Book
     public function addSuggestion(\Desarrolla2\Bundle\BookyBundle\Entity\Suggestion $suggestions)
     {
         $this->suggestions[] = $suggestions;
-    
+
+        return $this;
+    }
+
+    /**
+     * @param $suggestions
+     * @return $this
+     */
+    public function setSuggestions($suggestions)
+    {
+        $this->suggestions = array();
+        foreach ($suggestions as $s) {
+            $this->addSuggestion($s);
+        }
+
         return $this;
     }
 
@@ -269,7 +291,7 @@ class Book
     /**
      * Get suggestions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSuggestions()
     {
@@ -285,14 +307,14 @@ class Book
     public function setAuthor(\Desarrolla2\Bundle\BookyBundle\Entity\Author $author = null)
     {
         $this->author = $author;
-    
+
         return $this;
     }
 
     /**
      * Get author
      *
-     * @return \Desarrolla2\Bundle\BookyBundle\Entity\Author 
+     * @return \Desarrolla2\Bundle\BookyBundle\Entity\Author
      */
     public function getAuthor()
     {
@@ -308,14 +330,14 @@ class Book
     public function setEditorial(\Desarrolla2\Bundle\BookyBundle\Entity\Editorial $editorial = null)
     {
         $this->editorial = $editorial;
-    
+
         return $this;
     }
 
     /**
      * Get editorial
      *
-     * @return \Desarrolla2\Bundle\BookyBundle\Entity\Editorial 
+     * @return \Desarrolla2\Bundle\BookyBundle\Entity\Editorial
      */
     public function getEditorial()
     {
@@ -331,14 +353,14 @@ class Book
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -354,14 +376,14 @@ class Book
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

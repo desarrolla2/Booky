@@ -3,6 +3,7 @@
 namespace Desarrolla2\Bundle\BookyBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Desarrolla2\Bundle\BookyBundle\Entity\Editorial;
 
 /**
  * EditorialRepository
@@ -12,4 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class EditorialRepository extends EntityRepository
 {
+    public function factory($name)
+    {
+        $em = $this->getEntityManager();
+
+        $editorial = $this->findOneBy(
+            array(
+                'name' => $name
+            )
+        );
+        if (!$editorial) {
+            $editorial = new Editorial();
+            $editorial->setName($name);
+        }
+
+        $em->persist($editorial);
+
+        return $editorial;
+    }
 }

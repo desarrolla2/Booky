@@ -2,6 +2,7 @@
 
 namespace Desarrolla2\Bundle\BookyBundle\Entity\Repository;
 
+use Desarrolla2\Bundle\BookyBundle\Entity\Suggestion;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class SuggestionRepository extends EntityRepository
 {
+
+    public function factory($suggestionUrls)
+    {
+        $em = $this->getEntityManager();
+        $suggestions = array();
+
+        foreach ($suggestionUrls as $suggestionUrl) {
+            $suggestion = $this->findOneBy(
+                array(
+                    'url' => $suggestionUrl
+                )
+            );
+            if (!$suggestion) {
+                $suggestion = new Suggestion();
+                $suggestion->setUrl($suggestionUrl);
+            }
+            $suggestions[] = $suggestion;
+            $em->persist($suggestion);
+        }
+
+        return $suggestions;
+    }
 }

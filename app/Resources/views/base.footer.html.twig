@@ -6,6 +6,32 @@
   </footer>
 </div>
 
-
 <script src="//code.jquery.com/jquery.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    var $loading = $('<p><img src="/img/loading.gif" /> Loading ...</p>');
+    var $result = $('#search-result');
+    $('#form-search').submit(function (e) {
+      e.preventDefault();
+      $result.html($loading);
+      var values = {};
+      $.each($(this).serializeArray(), function (i, field) {
+        values[field.name] = field.value;
+      });
+      $.post($(this).attr('action'), values)
+          .done(function (data) {
+            var html = '<table class="table"><thead><tr><td>key</td><td>value</td></tr></thead><tbody>';
+            $.each(data, function (key, value) {
+              html += '<tr><td>' + key + '</td><td>' + value + '</td></tr>'
+            });
+            html += '</tbody></table>';
+
+            $result.html($(html));
+          })
+          .fail(function (data) {
+            $result.html($('<div class="alert alert-danger">' + data.responseText + '</div>'));
+          })
+    });
+  });
+</script>
