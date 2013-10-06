@@ -34,13 +34,19 @@ class Book
      */
     private $id;
 
-
     /**
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="source", type="string", length=255)
+     */
+    private $source;
 
     /**
      * @var string $isbn
@@ -388,5 +394,28 @@ class Book
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set source
+     *
+     * @param string $source
+     * @return Book
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+    
+        return $this;
+    }
+
+    /**
+     * Get source
+     *
+     * @return string 
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }

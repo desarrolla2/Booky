@@ -41,7 +41,7 @@ class BookRepository extends EntityRepository
             $book->setIsbn($bookArray['isbn']);
         }
 
-        foreach (array('title', 'resume', 'rating', 'price') as $property) {
+        foreach (array('title', 'resume', 'rating', 'price', 'source') as $property) {
             if (isset($bookArray[$property])) {
                 $method = 'set' . $property;
                 $book->$method($bookArray[$property]);

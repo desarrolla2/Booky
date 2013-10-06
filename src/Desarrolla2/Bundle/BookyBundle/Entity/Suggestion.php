@@ -142,4 +142,44 @@ class Suggestion
     {
         return $this->updatedAt;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->book = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add book
+     *
+     * @param \Desarrolla2\Bundle\BookyBundle\Entity\Book $book
+     * @return Suggestion
+     */
+    public function addBook(\Desarrolla2\Bundle\BookyBundle\Entity\Book $book)
+    {
+        $this->book[] = $book;
+    
+        return $this;
+    }
+
+    /**
+     * Remove book
+     *
+     * @param \Desarrolla2\Bundle\BookyBundle\Entity\Book $book
+     */
+    public function removeBook(\Desarrolla2\Bundle\BookyBundle\Entity\Book $book)
+    {
+        $this->book->removeElement($book);
+    }
+
+    /**
+     * Get book
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBook()
+    {
+        return $this->book;
+    }
 }

@@ -30,6 +30,7 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
         }
 
         return array(
+            'source' => $url,
             'title' => $this->getTitle(),
             'author' => $this->getAuthor(),
             'isbn' => $this->getIsbn(),
@@ -145,7 +146,12 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
     private function getRating()
     {
         try {
-            return (int)$this->crawler->filter('span.stars.posRela span span.average-rating')->text();
+            $nodes = $this->crawler->filter('div.stars span.average-rating');
+            foreach ($nodes as $node) {
+                return (int)trim(
+                    str_replace('star0', '', str_replace('average-rating', '', $node->getAttribute('class')))
+                );
+            }
         } catch (\Exception $e) {
             return false;
         }
