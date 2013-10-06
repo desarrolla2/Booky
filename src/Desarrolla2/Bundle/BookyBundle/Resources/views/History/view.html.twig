@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+  <h1>History</h1>
+
+  <p>
+    This is a template for a simple marketing or informational website. It includes a large callout called the hero
+    unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+  </p>
+
+  <div id="content">
+    <h2>{{ item }}</h2>
+    <table class="table">
+      </tbody>
+      <tr>
+        <td>source</td>
+        <td>{{ item.source }}</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>{{ item.title }}</td>
+      </tr>
+      <tr>
+        <td>author</td>
+        <td>{{ item.author }}</td>
+      </tr>
+      <tr>
+        <td>isbn</td>
+        <td>{{ item.isbn }}</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>{{ item.image }}</td>
+      </tr>
+      <tr>
+        <td>editorial</td>
+        <td>{{ item.editorial }}</td>
+      </tr>
+      <tr>
+        <td>resume</td>
+        <td>{{ item.resume }}</td>
+      </tr>
+      <tr>
+        <td>rating</td>
+        <td>{{ item.rating }}</td>
+      </tr>
+      <tr>
+        <td>price</td>
+        <td>{{ item.price }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <a href="{{ path('history') }}">back</a>
+  </div>
+{% endblock %}

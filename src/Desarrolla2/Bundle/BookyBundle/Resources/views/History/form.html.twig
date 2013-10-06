@@ -1,0 +1,10 @@
+<form id="form-filter" class="form-horizontal" role="form" method="get" action="{{ path('history') }}">
+  <div class="row">
+    <div class="col-lg-2 pull-right">
+      <input type="submit" value="Order" class="btn btn-primary "/>
+    </div>
+    <div class="col-lg-2 pull-right">{{ form_widget(form.mode , { 'attr': {'class': 'form-control' }} ) }}</div>
+    <div class="col-lg-2 pull-right">{{ form_widget(form.order, { 'attr': {'class': 'form-control' }} ) }}</div>
+    <div class="col-lg-1 pull-right"><label>Order by</label></div>
+  </div>
+</form>

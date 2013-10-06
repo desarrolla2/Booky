@@ -55,6 +55,12 @@ class Book
      */
     private $isbn;
 
+    /**
+     * @var string $image
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
 
     /**
      * @var string $resume
@@ -405,17 +411,40 @@ class Book
     public function setSource($source)
     {
         $this->source = $source;
-    
+
         return $this;
     }
 
     /**
      * Get source
      *
-     * @return string 
+     * @return string
      */
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Book
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

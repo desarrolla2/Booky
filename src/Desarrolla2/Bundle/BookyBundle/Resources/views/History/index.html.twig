@@ -8,13 +8,29 @@
     unit and three supporting pieces of content. Use it as a starting point to create something more unique.
   </p>
 
-  {% for item in pagination %}
-    <ul>
-      {% include 'BookyBundle:History:item.html.twig' with {'item': item} %}
-    </ul>
-  {% else %}
-    <p>No hay elementos</p>
-  {% endfor %}
+  {% include 'BookyBundle:History:form.html.twig' with {'form': form} %}
 
-  <div class="navigation">{{ knp_pagination_render(pagination) }}</div>
+  <div id="content">
+    <table class="table">
+      <thead>
+      <tr>
+        <td>img</td>
+        <td>title</td>
+        <td>rating</td>
+        <td>actions</td>
+      </tr>
+      </thead>
+      </tbody>
+      {% for item in pagination %}
+        {% include 'BookyBundle:History:item.html.twig' with {'item': item} %}
+      {% else %}
+        <tr>
+          <td colspan="3">no books</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="navigation">{{ knp_pagination_render(pagination) }}</div>
+  </div>
 {% endblock %}

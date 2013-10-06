@@ -1,1 +1,13 @@
-<li>{{ item }}</li>
+<tr>
+  <td>{% if item.image %}<img src="{{ item.image }}" width="40"/>{% endif %}</td>
+  <td>{{ item }}</td>
+  <td>{{ item.rating }}</td>
+  <td>
+    <ul>
+      {% if item.source %}
+        <li><a href="{{ item.source }}" target="_blank">original</a></li>
+      {% endif %}
+      <li><a href="{{ path('view', {id: item.id}) }}" >view</a></li>
+    </ul>
+  </td>
+</tr>

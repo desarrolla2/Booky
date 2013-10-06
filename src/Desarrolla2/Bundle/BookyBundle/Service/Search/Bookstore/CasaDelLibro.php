@@ -34,12 +34,26 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
             'title' => $this->getTitle(),
             'author' => $this->getAuthor(),
             'isbn' => $this->getIsbn(),
+            'image' => $this->getImage(),
             'editorial' => $this->getEditorial(),
             'resume' => $this->getResume(),
             'rating' => $this->getRating(),
             'price' => $this->getPrice(),
-            'suggestions' => $this->getSuggestions()
+            'suggestions' => $this->getSuggestions(),
         );
+    }
+
+    private function getImage()
+    {
+        try {
+            $nodes = $this->crawler->filter('div.book-header-img img');
+            foreach ($nodes as $node) {
+                return $node->getAttribute('src');
+            }
+        } catch (\Exception $e) {
+        }
+
+        return '';
     }
 
     /**
@@ -73,7 +87,7 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
         } catch (\Exception $e) {
         }
 
-        return false;
+        return 0;
     }
 
     /**
@@ -86,7 +100,7 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
         } catch (\Exception $e) {
         }
 
-        return false;
+        return '';
     }
 
     /**
@@ -99,7 +113,7 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
         } catch (\Exception $e) {
         }
 
-        return false;
+        return '';
     }
 
     /**
@@ -112,7 +126,7 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
         } catch (\Exception $e) {
         }
 
-        return false;
+        return '';
     }
 
     /**
@@ -121,11 +135,11 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
     private function getAuthor()
     {
         try {
-            return $this->crawler->filter('h2 a.book-header-2-subtitle-author')->text();
+            return $this->crawler->filter('h2 .book-header-2-subtitle-author')->text();
         } catch (\Exception $e) {
         }
 
-        return false;
+        return '';
     }
 
     /**
@@ -136,7 +150,7 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
         try {
             return $this->crawler->filter('h1.book-header-2-title')->text();
         } catch (\Exception $e) {
-            return false;
+            return '';
         }
     }
 
@@ -153,7 +167,7 @@ class CasaDelLibro extends AbstractBookstore implements BookstoreInterface
                 );
             }
         } catch (\Exception $e) {
-            return false;
+            return 0;
         }
     }
 }

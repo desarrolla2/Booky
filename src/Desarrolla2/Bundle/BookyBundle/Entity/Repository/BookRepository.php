@@ -14,14 +14,13 @@ use Desarrolla2\Bundle\BookyBundle\Entity\Book;
 class BookRepository extends EntityRepository
 {
 
-    public function getQueryForHistory()
+    public function getQueryBuilderForHistory()
     {
         $em = $this->getEntityManager();
 
-        return $em->createQuery(
-            ' SELECT b ' .
-            ' FROM BookyBundle:Book b '
-        );
+        return $em->createQueryBuilder()
+            ->select('b')
+            ->from('BookyBundle:Book', 'b');
     }
 
     public function factory(array $bookArray)
@@ -41,7 +40,7 @@ class BookRepository extends EntityRepository
             $book->setIsbn($bookArray['isbn']);
         }
 
-        foreach (array('title', 'resume', 'rating', 'price', 'source') as $property) {
+        foreach (array('title', 'resume', 'rating', 'price', 'source', 'image') as $property) {
             if (isset($bookArray[$property])) {
                 $method = 'set' . $property;
                 $book->$method($bookArray[$property]);
